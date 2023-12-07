@@ -38,7 +38,7 @@ export function Post({ post }: PostProps) {
   const [newCommentText, setNewCommentText] = useState('')
 
   const publishedDateFormatted = format(
-    publishedAt, 
+    post.publishedAt, 
     "d 'de' LLLL 'às' HH:mm'h'", {
     locale:ptBR,
   })
