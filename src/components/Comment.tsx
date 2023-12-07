@@ -5,7 +5,7 @@ import styles from "./Comment.module.css";
 
 interface CommentProps {
   content: string;
-  onDeleteCommment: (commnet: string) => void;
+  onDeleteComment: (comment: string) => void;
 }
 
 export function Comment({ content, onDeleteComment }: CommentProps) {
