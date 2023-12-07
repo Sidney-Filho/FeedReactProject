@@ -1,5 +1,5 @@
 import { format, formatDistanceToNow } from 'date-fns';
-import { ptBR } from 'date-fns/locale/pt-BR'
+import ptBR from 'date-fns/locale/pt-BR';
 import { FormEvent, useState, ChangeEvent, InvalidEvent } from 'react';
 
 import { Comment } from "./Comment";
@@ -26,29 +26,31 @@ export interface PostType {
 }
 
 interface PostProps {
-  post: Post;
+  post: PostType;
 }
 
 export function Post({ post }: PostProps) {
 
-  const [comments, setComments] = useState([
+  const [comments, setComments] = useState<string[]>([
     'Post muito bacana, hein?!',
   ])
 
-  const [newCommentText, setNewCommentText] = useState('')
+  const [newCommentText, setNewCommentText] = useState<string>('')
 
-  const publishedDateFormatted = format(
-    post.publishedAt, 
-    "d 'de' LLLL 'às' HH:mm'h'", {
-    locale:ptBR,
-  })
+  const publishedDateFormatted = format<Date>(
+      post.publishedAt, 
+      "d 'de' LLLL 'às' HH:mm'h'", 
+      {
+        locale: ptBR,
+      }
+  )
 
-  const publishedDateRelativeToNow = formatDistanceToNow(post.publishedAt, {
+  const publishedDateRelativeToNow = formatDistanceToNow<Date>(post.publishedAt, {
     locale: ptBR,
     addSuffix: true,
-  })
+  });
 
-  function handleCreateNewComment(event: FormEvent) {
+  function handleCreateNewComment(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     setComments([...comments, newCommentText]);
