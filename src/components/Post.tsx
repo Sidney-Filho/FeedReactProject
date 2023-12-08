@@ -1,5 +1,3 @@
-import { format, formatDistanceToNow } from "date-fns";
-import { ptBR } from "date-fns/locale";
 import { FormEvent, useState, ChangeEvent, InvalidEvent } from "react";
 
 import { Comment } from "./Comment";
@@ -36,22 +34,6 @@ export function Post({ post }: PostProps) {
 
   const [newCommentText, setNewCommentText] = useState<string>("");
 
-  const publishedDateFormatted = format<Date>(
-    post.publishedAt,
-    "d 'de' LLLL 'às' HH:mm'h'",
-    {
-      locale: ptBR,
-    }
-  );
-
-  const publishedDateRelativeToNow = formatDistanceToNow<Date>(
-    post.publishedAt,
-    {
-      locale: ptBR,
-      addSuffix: true,
-    }
-  );
-
   function handleCreateNewComment(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -74,8 +56,9 @@ export function Post({ post }: PostProps) {
     });
     setComments(commentsWithoutDeletedOne);
   }
-
+  
   const isNewCommentInputEmpty = newCommentText.length === 0;
+
 
   return (
     <article className={styles.post}>
@@ -89,10 +72,10 @@ export function Post({ post }: PostProps) {
         </div>
 
         <time
-          title={publishedDateFormatted}
+          title={post.publishedAt.toISOString()}
           dateTime={post.publishedAt.toISOString()}
         >
-          {publishedDateRelativeToNow}
+          {}
         </time>
       </header>
 
